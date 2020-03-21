@@ -1,0 +1,38 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<div class="blog-container">
+  <div class="blog">
+    <p class="blog-title">Blog</p>
+
+    {% for post in posts %}
+    <div class="post">
+      <p class="post-title">
+        <a href="{{ post.link }}" target="{% if post.new_tab %}_blank{% else %}_self{% endif%}">
+          {{ post.title }}
+        </a>
+      </p>
+
+      <span class="post-date">
+        {{ post.date_published|date:'d M Y' }}
+      </span>
+
+      <span class="post-tags">
+        {% for tag in post.tags.all %}
+          {{ tag|title }}
+          {% if forloop.counter < post.tags.all|length %},&nbsp;{% endif %}
+        {% endfor %}
+      </span>
+
+      <p class="post-text">
+        {{ post.summary }}
+      </p>
+    </div> <!-- .post -->
+    {% endfor %}
+
+  </div> <!-- .blog -->
+</div> <!-- .blog-container --> 
+{% endblock %}

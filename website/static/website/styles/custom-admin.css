@@ -1,0 +1,9 @@
+.field-body {
+    padding: 10px;
+    background: #eeeeee;
+    max-width: 800px;
+}
+
+.field-body label {
+    display: none !important;
+}

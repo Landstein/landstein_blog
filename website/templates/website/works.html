@@ -1,0 +1,45 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Works{% endblock %}
+
+{% block content %}
+<div class="works-container">
+  <div class="works">
+    <p class="works-title">Works</p>
+    
+      {% for work in works %}
+      <div class="work">
+        <div class="row work-inner">
+          <div class="work-left">
+            <a href="{{ work.link }}" target="{% if work.new_tab %}_blank{% else %}_self{% endif%}">
+              <div class="work-image" style="background-image: url('{{ work.image }}')"></div>
+            </a>
+          </div>
+          <div class="work-right">
+            <p class="work-title">
+              <a href="{{ work.link }}" target="{% if work.new_tab %}_blank{% else %}_self{% endif%}">
+                {{ work.title }}
+              </a>
+            </p>
+            <div class="d-flex flex-row align-items-center">
+              <span class="badge badge-pill badge-info work-year">
+                {{ work.date_published|date:"Y" }}
+              </span>
+              <span class="work-tags">
+              {% for tag in work.tags.all %}
+                {{ tag|title }}
+                {% if forloop.counter < work.tags.all|length %},&nbsp;{% endif %}
+              {% endfor %}
+              </span>
+            </div>
+            <p class="work-text">
+              {{ work.summary }}
+            </p>
+          </div>
+        </div>
+      </div> <!-- .work -->
+      {% endfor %}
+
+  </div> <!-- .works -->
+</div> <!-- .works-container --> 
+{% endblock %}
